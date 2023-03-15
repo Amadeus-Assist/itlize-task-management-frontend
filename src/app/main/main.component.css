@@ -1,0 +1,15 @@
+.main {
+    height: 100%;
+    width: 100%;
+    padding-top: 15px;
+    padding-inline: 20px;
+}
+
+.main-header {
+    height: 60px;
+}
+
+.main-title {
+    font-size: 22px;
+    color: royalblue;
+}

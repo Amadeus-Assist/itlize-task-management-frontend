@@ -1,0 +1,48 @@
+<div class="login-container rounded border border-1 shadow-sm position-absolute top-50 start-50 translate-middle">
+    <ul ngbNav #nav="ngbNav" [(activeId)]="activeId" class="nav-tabs login-nav-tabs">
+        <li [ngbNavItem]="'login'" class="login-nav-item">
+            <a class="login-nav-link" ngbNavLink>Login</a>
+            <ng-template ngbNavContent>
+                <div>
+                    <form #loginForm="ngForm" (ngSubmit)="login()">
+                        <div class="mb-3">
+                            <input #inputLoginUsername="ngModel" name="inputLoginUsername" type="text" required class="form-control login-form-row" id="inputLoginUsername" placeholder="Username *" [(ngModel)]="loginUsername"/>
+                        </div>
+                        <div class="mb-3">
+                            <input #inputLoginPassword="ngModel" name="inputLoginPassword" type="password" required class="form-control login-form-row" id="inputLoginPassword" placeholder="Password *" [(ngModel)]="loginPassword"/>
+                        </div>
+                        <div>
+                            <button [disabled]="!loginForm.valid" class="btn btn-primary">LOGIN</button>
+                        </div>
+                    </form>
+                </div>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="'register'" class="login-nav-item">
+            <a class="login-nav-link" ngbNavLink>Register</a>
+            <ng-template ngbNavContent>
+                <div>
+                    <form #registerForm="ngForm" (ngSubmit)="register()">
+                        <div class="mb-3">
+                            <input #inputRegisterUsername="ngModel" name="inputRegisterUsername" type="text" required class="form-control login-form-row" id="inputRegisterUsername" placeholder="Username *" [(ngModel)]="registerUsername"/>
+                        </div>
+                        <div class="invalid-warning" *ngIf="usernameInvalidMsg">{{usernameInvalidMsg}}</div>
+                        <div class="mb-3">
+                            <input #inputrRegisterPassword="ngModel" name="inputRegisterPassword" type="password" required class="form-control login-form-row" id="inputRegisterPassword" placeholder="Password *" [(ngModel)]="registerPassword"/>
+                        </div>
+                        <div class="invalid-warning" *ngIf="passwordInvalidMsg">{{passwordInvalidMsg}}</div>
+                        <div class="mb-3">
+                            <input #inputrConRegisterPassword="ngModel" name="inputConRegisterPassword" type="password" required class="form-control login-form-row" id="inputConRegisterPassword" placeholder="Confirm Password *" [(ngModel)]="conRegisterPassword"/>
+                        </div>
+                        <div class="invalid-warning" *ngIf="confirmPasswordInvalidMsg">{{confirmPasswordInvalidMsg}}</div>
+                        <div>
+                            <button [disabled]="!registerForm.valid" class="btn btn-primary">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </ng-template>
+        </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+</div>
+<ngb-alert [type]="alertType" class="position-absolute top-0 start-50 translate-middle-x" #registerAlert *ngIf="alertMessage" (closed)="alertMessage = ''">{{alertMessage}}</ngb-alert>

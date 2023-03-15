@@ -1,0 +1,41 @@
+.login-container {
+    width: 600px;
+    padding: 10px;
+}
+
+.login-nav-tabs {
+    border: 2px royalblue solid;
+}
+
+.login-nav-item {
+    width: 50%;
+    border: none;
+}
+
+.login-nav-link {
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+    color: royalblue;
+    font-weight: bold;
+    text-align: center;
+}
+
+.login-nav-item .active {
+    background-color: royalblue;
+    color: white;
+}
+
+.login-form-row {
+    border-radius: 0;
+    border-inline: 0;
+    border-top: 0;
+    margin-top: 10px;
+}
+
+.invalid-warning {
+    height: 25px;
+    color: red;
+    font-size: 14px;
+    text-align: left;
+}

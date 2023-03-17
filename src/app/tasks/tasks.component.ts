@@ -1,5 +1,4 @@
-import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, IterableDiffer, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -19,7 +18,6 @@ export class TasksComponent implements OnInit, AfterViewInit{
   quotes: IQuote[] = [];
   dataColumns: string[][] = [['No.', 'Quote Type', 'Description', 'Sales', 'Due Date', 'Premium'], ['QuoteID', 'QuoteType', 'Description', 'Sales', 'DueDate', 'Premium']];
   columnNames: string[] = ['QuoteID', 'QuoteType', 'Description', 'Sales', 'DueDate', 'Premium', 'operate'];
-  iterableDiffer:IterableDiffer<any>;
   dataSource: MatTableDataSource<IQuote> = new MatTableDataSource<IQuote>();
   pageSizeOptions: number[] = [5, 10, 15];
   sortCols: string[] = ['QuoteID', 'QuoteType', 'Sales', 'DueDate', 'Premium'];
@@ -27,7 +25,7 @@ export class TasksComponent implements OnInit, AfterViewInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<IQuote>;
 
-  constructor(private taskService: TaskService, private rtr: Router, private modalService: NgbModal, private alertService: AlertService, private datepipe: DatePipe){
+  constructor(private taskService: TaskService, private rtr: Router, private modalService: NgbModal, private alertService: AlertService){
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

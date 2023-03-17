@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { AccountService } from '../shared/services/account.service';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { AlertService } from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private accountService: AccountService, private rtr: Router) { }
+  constructor(private accountService: AccountService, private rtr: Router, private alertService: AlertService) { }
   activeId: string = "login";
-  alertMessage: string = "";
-  alertType: string = "";
 
   loginUsername: string = "";
   loginPassword: string = "";
@@ -30,21 +29,19 @@ export class LoginComponent {
   login() {
     this.accountService.login(this.loginUsername, this.loginPassword).subscribe({
       next: resp => {
-        localStorage.setItem("TaskManagementUsername", resp.userName);
-        localStorage.setItem("TaskManagementToken", `${resp.token_type} ${resp.access_token}`);
-        this.accountService.username = resp.userName;
-        this.accountService.token = `${resp.token_type} ${resp.access_token}`;
         this.rtr.navigate(["tasks"]);
       },
       error: err => {
         console.log(err);
         if (err.status === 400) {
-          this.alertMessage = "Invalid username or password";
-          this.alertType = "warning";
+          this.alertService.emitAlert({
+            alertMessage: "Invalid username or password",
+            alertType: "warning"
+          })
           this.loginUsername = "";
           this.loginPassword = "";
-          setTimeout(() => this.alertMessage = "", 3000);
-        }else {
+          setTimeout(() => this.alertService.emitAlert(null), 3000);
+        } else {
           this.rtr.navigate(["error"]);
         }
       }
@@ -60,10 +57,12 @@ export class LoginComponent {
           this.usernameInvalidMsg = "";
           this.passwordInvalidMsg = "";
           this.confirmPasswordInvalidMsg = "";
-          this.alertMessage = "Register successfully!"
-          this.alertType = "success;"
+          this.alertService.emitAlert({
+            alertMessage: "Register successfully!",
+            alertType: "success"
+          })
           this.activeId = "login";
-          setTimeout(() => this.alertMessage = "", 2000);
+          setTimeout(() => this.alertService.emitAlert(null), 2000);
         },
         error: err => {
           if (err.status === 400) {
@@ -83,8 +82,10 @@ export class LoginComponent {
               }
             }
 
-            this.alertMessage = newAlertMsg.length === 0 ? "invalid request" : newAlertMsg.join(" | ");
-            this.alertType = "danger";
+            this.alertService.emitAlert({
+              alertMessage: newAlertMsg.length === 0 ? "invalid request" : newAlertMsg.join(" | "),
+              alertType: "danger"
+            })
             this.registerUsername = "";
             this.registerPassword = "";
             this.conRegisterPassword = "";

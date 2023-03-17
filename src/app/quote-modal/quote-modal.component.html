@@ -1,0 +1,90 @@
+<div class="modal-header">
+    <h4 class="modal-title quote-modal-title">{{title}}</h4>
+    <!-- <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button> -->
+</div>
+<form #modalForm="ngForm" (ngSubmit)="submit(modalForm)">
+    <div class="modal-body">
+        <div *ngIf="quote" class="container">
+            <div class="row align-items-center quote-modal-row">
+                <div class="col-4 quote-modal-label">
+                    Quote Id
+                </div>
+                <div class="col-4 quote-modal-input">
+                    <input class="modal-full-input" #modalID="ngModel" name="modalID" id="modalID" type="text"
+                        [(ngModel)]="quote.QuoteID" disabled />
+                </div>
+            </div>
+            <div class="row align-items-center quote-modal-row">
+                <div class="col-4 quote-modal-label">
+                    Quote Type
+                </div>
+                <div class="col-4 quote-modal-input quote-modal-row">
+                    <select #modalType="ngModel" name="modalType" id="modalType" [(ngModel)]="quote.QuoteType">
+                        <option ngValue="Auto">Auto</option>
+                        <option ngValue="House">House</option>
+                        <option ngValue="Apartment">Apartment</option>
+                        <option ngValue="Vehicle">Vehicle</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row align-items-center quote-modal-row">
+                <div class="col-4 quote-modal-label">
+                    Sales
+                </div>
+                <div class="col-4 quote-modal-input">
+                    <input #modalSales="ngModel" name="modalSales" id="modalSales" required type="text"
+                        class="form-control" [(ngModel)]="quote.Sales" />
+                    <ng-container *ngIf="submitted && modalSales.errors?.['required']">
+                        <div class="text-danger">This field is required</div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row align-items-center quote-modal-row">
+                <div class="col-4 quote-modal-label">
+                    Premium
+                </div>
+                <div class="col-4 quote-modal-input">
+                    <input #modalPremium="ngModel" name="modalPremium" required pattern="[0-9]*" type="text"
+                        class="form-control" [(ngModel)]="premiumStr" />
+                    <ng-container *ngIf="submitted && modalPremium.errors?.['required']">
+                        <div class="text-danger">This field is required</div>
+                    </ng-container>
+                    <ng-container *ngIf="submitted && modalPremium.errors?.['pattern']">
+                        <div class="text-danger">This field only accepts numbers</div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row align-items-center quote-modal-row">
+                <div class="col-4 quote-modal-label">
+                    Due Date
+                </div>
+                <div class="col-8 quote-modal-input d-flex align-items-center">
+                    <div class="input-group d-inline-flex quote-modal-datepicker">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="date" ngbDatepicker
+                            #d="ngbDatepicker" />
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()"
+                            type="button"></button>
+                    </div>
+                    <ngb-timepicker class="d-inline-flex" name="modalTime" [(ngModel)]="time"
+                        [meridian]="true"></ngb-timepicker>
+                </div>
+            </div>
+            <div class="row align-items-center quote-modal-row">
+                <div class="col-4 quote-modal-label">
+                    Description
+                </div>
+                <div class="col-8 quote-modal-input">
+                    <textarea #modalDescription="ngModel" name="modalDescription" required class="form-control"
+                        [(ngModel)]="quote.Description"></textarea>
+                    <ng-container *ngIf="submitted && modalDescription.errors?.['required']">
+                        <div class="text-danger">This field is required</div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn" (click)="activeModal.close('Close click')">Cancel</button>
+        <button type="submit" class="btn">Submit</button>
+    </div>
+</form>

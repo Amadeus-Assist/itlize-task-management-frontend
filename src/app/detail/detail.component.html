@@ -1,1 +1,21 @@
-<p>detail works!</p>
+<div class="detail-container position-relative">
+    <div>
+        <button mat-icon-button color="primary" aria-label="home" (click)="back()">
+            <mat-icon>home</mat-icon>
+        </button>
+    </div>
+    <div class="detail-content position-absolute start-50 translate-middle-x">
+        <div class="detail-img">
+            <img src="assets/Quote_Detail.jpg" class="img-fluid float-start" alt="QuoteImage">
+        </div>
+        <div *ngIf="quoteDetail" class="container">
+            <div *ngFor="let key of object.keys(quoteDetail)" class="row align-items-start">
+                <div class="col detail-row detail-label">
+                    {{key}}
+                </div>
+                <div class="col detail-row">
+                    {{ key == "Sales Person" ? (quoteDetail[key] | titlecase) : key == "Due Date" ? (quoteDetail[key] | date: 'MM/dd/yyyy') : key === "Premium Account" ? (quoteDetail[key] | currency) : quoteDetail[key]}}
+                </div>
+            </div>
+        </div>
+    </div>

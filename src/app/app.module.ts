@@ -13,6 +13,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { ErrorComponent } from './error/error.component';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuoteModalComponent } from './quote-modal/quote-modal.component';
+import { DatePipe } from '@angular/common';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TasksComponent,
     DetailComponent,
     MainComponent,
-    ErrorComponent
+    ErrorComponent,
+    QuoteModalComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MaterialModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
   exports: [NgbModule]
 })

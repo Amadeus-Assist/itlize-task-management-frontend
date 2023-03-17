@@ -2,7 +2,7 @@ export interface IQuote {
     QuoteID: number,
     QuoteType: string,
     Description: string,
-    DueDate: string,
+    DueDate: Date,
     Premium: number,
-    Sales: number
+    Sales: string
 }

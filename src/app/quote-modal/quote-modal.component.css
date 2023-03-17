@@ -1,0 +1,20 @@
+.quote-modal-title {
+    background-color: royalblue;
+    color: white;
+    width: 100%;
+    margin-right: 50px;
+    margin-bottom: 0 !important;
+}
+
+.quote-modal-row {
+    margin-block: 10px;
+}
+
+.modal-full-input {
+    width: 100%;
+}
+
+.quote-modal-datepicker {
+    width: 33%;
+    margin-right: 10px;
+}

@@ -1,0 +1,23 @@
+.detail-container {
+    width: 100%;
+}
+
+.detail-content {
+    width: 70%;
+}
+
+.detail-img {
+    width: 300px;
+    height: auto;
+    display: inline-block;
+}
+
+.detail-row {
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.detail-label {
+    color: royalblue;
+    font-weight: bold;
+}

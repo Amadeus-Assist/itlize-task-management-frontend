@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IQuote } from '../shared/interfaces/iquote';
 import { AccountService } from '../shared/services/account.service';
+import { TaskService } from '../shared/services/task.service';
 
 @Component({
   selector: 'app-main',
@@ -8,13 +10,14 @@ import { AccountService } from '../shared/services/account.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-   constructor(private accountService: AccountService, private rtr: Router){}
 
-   logout() {
-    this.accountService.username = "";
-    this.accountService.token = "";
+  constructor(private accountService: AccountService, private taskService: TaskService, private rtr: Router) { }
+
+  logout() {
+    this.accountService.clearCredential();
     localStorage.setItem("TaskManagementUsername", "");
     localStorage.setItem("TaskManagementToken", "");
+    this.taskService.clear();
     this.rtr.navigate(["login"]);
-   }
+  }
 }

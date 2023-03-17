@@ -1,3 +1,4 @@
 <div class="app">
   <router-outlet></router-outlet>
+  <ngb-alert [type]="alert.alertType" class="position-fixed top-0 start-50 translate-middle-x alert" #registerAlert *ngIf="alert" (closed)="alert = null">{{alert.alertMessage}}</ngb-alert>
 </div>

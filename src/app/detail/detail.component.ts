@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDetailQuote } from '../shared/interfaces/idetail-quote';
-import { IQuote } from '../shared/interfaces/iquote';
 import { TaskService } from '../shared/services/task.service';
 import { Location } from '@angular/common'
 
@@ -27,7 +26,6 @@ export class DetailComponent implements OnInit {
         "Due Date": quote.DueDate,
         "Description": quote.Description
       };
-      console.log(this.quoteDetail);
     } else {
       this.rtr.navigate(["tasks"]);
     }

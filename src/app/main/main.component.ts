@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IQuote } from '../shared/interfaces/iquote';
 import { AccountService } from '../shared/services/account.service';
 import { TaskService } from '../shared/services/task.service';
 

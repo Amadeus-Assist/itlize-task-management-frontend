@@ -23,26 +23,17 @@ export class QuoteModalComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private datepipe: DatePipe, private taskService: TaskService, private alertService: AlertService) {}
   ngOnInit(): void {
     this.premiumStr = this.quote.Premium?.toFixed(0);
-    // const datetimeStrs = this.quote.DueDate.split("T");
-    // const dateStrs = datetimeStrs[0].split("-");
-    // const timeStrs = datetimeStrs[1].split(":");
-    console.log(this.quote.DueDate);
     const datetime = new Date(this.quote.DueDate);
     this.date = {
-      // year: parseInt(dateStrs[0]),
-      // month: parseInt(dateStrs[1]),
-      // day: parseInt(dateStrs[2]),
       year: datetime.getFullYear(),
       month: datetime.getMonth()+1,
       day: datetime.getDate(),
     }
-    console.log("date", this.date);
     this.time = {
       hour: datetime.getHours(),
       minute: datetime.getMinutes(),
       second: datetime.getSeconds(),
     }
-    console.log("time", this.time);
   }
 
   submit(form: NgForm) {
@@ -67,8 +58,6 @@ export class QuoteModalComponent implements OnInit {
   }
 
   submitAdd() {
-    console.log("submit add");
-    console.log(this.quote);
     this.taskService.addQuote(this.quote).subscribe({
       next: resp=>{
         this.alertService.emitAlert({
@@ -93,8 +82,6 @@ export class QuoteModalComponent implements OnInit {
   }
 
   submitUpdate() {
-    console.log("submit update");
-    console.log(this.quote);
     this.taskService.editQuote(this.quote).subscribe({
       next: resp => 
       {

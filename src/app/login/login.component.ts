@@ -1,6 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { AccountService } from '../shared/services/account.service';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { AlertService } from '../shared/services/alert.service';
 
@@ -32,7 +31,6 @@ export class LoginComponent {
         this.rtr.navigate(["tasks"]);
       },
       error: err => {
-        console.log(err);
         if (err.status === 400) {
           this.alertService.emitAlert({
             alertMessage: "Invalid username or password",

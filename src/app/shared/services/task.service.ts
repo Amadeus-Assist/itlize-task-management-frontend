@@ -31,7 +31,6 @@ export class TaskService {
   }
 
   getAllQuotes() {
-    console.log("get all quotes called");
     if (this.quotes && this.quotes.length) {
       this.quoteEmitter.emit(this.quotes);
       return;
@@ -119,7 +118,6 @@ export class TaskService {
           this.getAllQuotesFromDB();
         }else {
           this.quotes.splice(idx, 1);
-          console.log(this.quotes);
           this.quoteEmitter.emit(this.quotes);
         }
     }));

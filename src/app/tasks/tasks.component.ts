@@ -1,7 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, DoCheck, EventEmitter, IterableDiffer, IterableDiffers, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, IterableDiffer, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -56,7 +55,6 @@ export class TasksComponent implements OnInit, AfterViewInit{
   changePageSize(event) {
     const eventValue = event.target.value;
     this.taskService.pageSize = parseInt(eventValue.substring(eventValue.indexOf(":")+2));
-    console.log(this.taskService.pageSize);
     this.paginator._changePageSize(this.taskService.pageSize);
   }
 
@@ -92,16 +90,14 @@ export class TasksComponent implements OnInit, AfterViewInit{
   filter() {
     if (this.taskService.filterKey) {
       const key = this.taskService.filterKey;
-      this.quotes = this.quotes.filter((q)=>q.Description.toLowerCase().includes(key) || q.QuoteType.toLowerCase() == key || q.Sales.toLowerCase().includes(key));
+      this.quotes = this.taskService.quotes.filter((q)=>q.Description.toLowerCase().includes(key) || q.QuoteType.toLowerCase() == key || q.Sales.toLowerCase().includes(key));
     }else {
       this.quotes = this.taskService.quotes;
     }
   }
 
   doFilter(event) {
-    console.log(event.keyCode);
     if (event.keyCode == 13) {
-      console.log(event.target.value);
       this.taskService.filterKey = event.target.value.toLowerCase();
       this.filter();
       this.dataSource.data = this.quotes;
@@ -124,7 +120,6 @@ export class TasksComponent implements OnInit, AfterViewInit{
       QuoteType: "Auto",
       DueDate: new Date()
     };
-    console.log(modalRef.componentInstance.quote);
     modalRef.componentInstance.type = "add";
     modalRef.componentInstance.index = 0;
   }
@@ -141,7 +136,6 @@ export class TasksComponent implements OnInit, AfterViewInit{
   }
 
   delete(quote: IQuote) {
-    // this.quotes.splice(index);
     const modalRef = this.modalService.open(ConfirmModalComponent, {centered: true});
     modalRef.componentInstance.title = "Are you sure?";
     modalRef.componentInstance.content = "You are about to delete user";

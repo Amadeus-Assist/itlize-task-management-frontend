@@ -1,5 +1,5 @@
 import { inject } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot } from "@angular/router";
 import { AccountService } from "../services/account.service";
 
 export const canActivateTasks: CanActivateFn =
@@ -10,12 +10,4 @@ export const canActivateTasks: CanActivateFn =
         return true;
       }
       return false;
-      // accountService.username = localStorage.getItem("TaskManagementUsername");
-      // accountService.token = localStorage.getItem("TaskManagementToken");
-      // console.log("retrieve token from local storage");
-      // if (accountService.username && accountService.token) {
-      //   return true;
-      // }
-      // inject(Router).navigate(["login"]);
-      // return false;
     };
